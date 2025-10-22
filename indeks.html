@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Landing Page - Sistem Informasi Profil</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #e0ecff, #f6f9ff);
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background-color: #2c7be5;
+      color: white;
+      padding: 20px 0;
+      text-align: center;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 30px auto;
+      background-color: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    h1, h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+    }
+
+    label {
+      margin-top: 15px;
+      font-weight: 600;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="date"],
+    input[type="file"] {
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 12px;
+      background-color: #2c7be5;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    button:hover {
+      background-color: #1a5acb;
+    }
+
+    .profile-card {
+      margin-top: 30px;
+      background-color: #f0f7ff;
+      padding: 25px;
+      border-radius: 10px;
+      text-align: center;
+    }
+
+    .profile-card img {
+      max-width: 120px;
+      border-radius: 50%;
+      margin-bottom: 15px;
+      border: 2px solid #2c7be5;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      font-size: 14px;
+      color: #666;
+    }
+
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Sistem Informasi Profil Pengguna</h1>
+    <p>Landing Page Sederhana</p>
+  </header>
+
+  <div class="container">
+    <form id="profileForm">
+      <label for="name">Nama Lengkap:</label>
+      <input type="text" id="name" required />
+
+      <label for="email">Email:</label>
+      <input type="email" id="email" required />
+
+      <label for="dob">Tanggal Lahir:</label>
+      <input type="date" id="dob" required />
+
+      <label for="photo">Foto Profil:</label>
+      <input type="file" id="photo" accept="image/*" />
+
+      <button type="submit">Simpan Profil</button>
+    </form>
+
+    <div id="profileDisplay" class="profile-card hidden">
+      <h2>Profil Anda</h2>
+      <img id="displayPhoto" src="#" alt="Foto Profil" />
+      <p><strong>Nama:</strong> <span id="displayName"></span></p>
+      <p><strong>Email:</strong> <span id="displayEmail"></span></p>
+      <p><strong>Tanggal Lahir:</strong> <span id="displayDob"></span></p>
+    </div>
+  </div>
+
+  <footer>
+    &copy; 2025 Sistem Informasi Profil - Dibuat dengan HTML, CSS, dan JavaScript
+  </footer>
+
+  <script>
+    document.getElementById('profileForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      // Ambil data
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const dob = document.getElementById('dob').value;
+      const photoFile = document.getElementById('photo').files[0];
+
+      // Tampilkan data
+      document.getElementById('displayName').textContent = name;
+      document.getElementById('displayEmail').textContent = email;
+      document.getElementById('displayDob').textContent = dob;
+
+      if (photoFile) {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+          document.getElementById('displayPhoto').src = e.target.result;
+        };
+        reader.readAsDataURL(photoFile);
+      } else {
+        document.getElementById('displayPhoto').src = "#";
+      }
+
+      // Tampilkan profil
+      document.getElementById('profileDisplay').classList.remove('hidden');
+    });
+  </script>
+
+</body>
+</html>
